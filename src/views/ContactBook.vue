@@ -41,7 +41,17 @@
           <i class="fas fa-address-card"></i> Chi tiết Liên hệ
         </h4>
         <ContactCard :contact="activeContact" />
-      </div>
+        <router-link
+          :to="{
+            name: 'contact.edit',
+            params: { id: activeContact._id },
+          }"
+        >
+          <span class="mt-2 badge badge-warning">
+            <i class="fas fa-edit"></i> Hiệu chỉnh
+          </span>
+        </router-link>
+        </div>
     </div>
   </div>
 </template>
@@ -57,7 +67,6 @@ export default {
     ContactCard,
     InputSearch,
     ContactList,
-   
   },
   data() {
     return {
@@ -72,13 +81,13 @@ export default {
     },
   },
   computed: {
- contactStrings() {
+    contactStrings() {
       return this.contacts.map((contact) => {
         const { name, email, address, phone } = contact;
         return [name, email, address, phone].join("");
       });
     },
-   filteredContacts() {
+    filteredContacts() {
       if (!this.searchText) return this.contacts;
       return this.contacts.filter((_contact, index) =>
         this.contactStrings[index].includes(this.searchText)

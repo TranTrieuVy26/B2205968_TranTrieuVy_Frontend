@@ -1,4 +1,5 @@
 import createApiClient from "./api.service";
+const apiClient = createApiClient("http://localhost:3000/api");
 
 class ContactService {
     constructor(baseURL = "/api/contacts") {
